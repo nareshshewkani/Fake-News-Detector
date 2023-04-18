@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Fake news detector</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="News Title" placeholder="News Title" required="required" />
+        <input type="text" name="News Text" placeholder="News text" required="required" />
+		
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+    <img {{ show_fake}} src="https://imgs.search.brave.com/5UFEGNywzHLNU3RniTyEAIymtUnFzaejeq4NLOsFXeE/rs:fit:498:294:1/g:ce/aHR0cHM6Ly9tZWRp/YS50ZW5vci5jb20v/RTlsMW1McHJWWkVB/QUFBQy9rdWNoLWJo/aS5naWY.gif">
+    <img {{ show_real }} src="https://imgs.search.brave.com/fTX6tR8JvBiKJGxTCbxRXNPel0IPuSkgbCJhVbigYB8/rs:fit:600:536:1/g:ce/aHR0cHM6Ly8zLmJw/LmJsb2dzcG90LmNv/bS8tUVVwSXloNFh2/c0kvVXNVZlBsYmJh/aEkvQUFBQUFBQUFB/cVUvdUJabVRwUG1S/U1EvczE2MDAvdHUr/c2FjaCtib2wrcmFo/YStoYWkucG5n">
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
