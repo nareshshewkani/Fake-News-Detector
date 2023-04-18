@@ -9,7 +9,7 @@ model = pickle.load(open("model.pkl", "rb"))
 vectorizer = pickle.load(open("tfidf_vectorizer.pkl","rb"))
 @flask_app.route("/")
 def Home():
-    return render_template("index.html")
+    return render_template("index.html", show_fake="hidden", show_real="hidden")
 
 @flask_app.route("/predict", methods = ["POST"])
 # def predict():
@@ -31,7 +31,16 @@ def predict():
     features = vectorizer.transform(features)
 
     prediction = model.predict(features)
-    return render_template("index.html", prediction_text = "This news is {} ".format(prediction[0]))
+    if(prediction[0]=="FAKE"):
+        show_real = "hidden"
+        show_fake = ""
+
+    else:
+        show_real = ""
+        show_fake = "hidden"
+
+
+    return render_template("index.html", prediction_text = "This news is {} ".format(prediction[0]), show_real=show_real, show_fake=show_fake)
 
 if __name__ == "__main__":
     flask_app.run(debug=True)
